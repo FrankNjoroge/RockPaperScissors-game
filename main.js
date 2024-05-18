@@ -8,23 +8,15 @@ function getComputerChoice() {
   const randomNumber = Math.floor(Math.random() * 3);
   return choices[randomNumber];
 }
-
-//get human choice
-function getHumanChoice() {
-  const humanChoice = prompt("Rock, Paper, Scissors. Choose one", "");
-  return humanChoice;
-}
-
 function playRound(computerChoice, humanChoice) {
-  humanChoice = humanChoice.toLowerCase();
   //win conditions
   if (
     (computerChoice === "rock" && humanChoice === "paper") ||
     (computerChoice === "paper" && humanChoice === "scissors") ||
     (computerChoice === "scissors" && humanChoice === "rock")
   ) {
-    console.log(`You WIN! Computer picked ${computerChoice}`);
     humanScore++;
+    return "You Win this round!";
   }
   //lose conditions
   else if (
@@ -32,47 +24,45 @@ function playRound(computerChoice, humanChoice) {
     (computerChoice === "paper" && humanChoice === "rock") ||
     (computerChoice === "scissors" && humanChoice === "paper")
   ) {
-    console.log(`You LOSE! Computer picked ${computerChoice}`);
     computerScore++;
-  }
-  //tie conditions
-  else if (
+    return "Comp wins this round!";
+  } else if (
     (computerChoice === "rock" && humanChoice === "rock") ||
     (computerChoice === "paper" && humanChoice === "paper") ||
     (computerChoice === "scissors" && humanChoice === "scissors")
   ) {
-    console.log(`You tie! Computer also picked ${computerChoice}`);
-  } else {
-    console.log("Not a valid choice, choose between rock,paper or scissors!");
-  }
-}
-function declareWinner() {
-  if (humanScore > computerScore) {
-    console.log("You Win the Game!");
-  } else if (computerScore > humanScore) {
-    console.log("Computer Wins the Game!");
-  } else {
-    console.log("The Game ends in a Tie!");
+    return "Tie!";
   }
 }
 
-for (let i = 0; i < 5; i++) {
-  let computerChoice = getComputerChoice();
-  let humanChoice = getHumanChoice();
-  playRound(computerChoice, humanChoice);
-}
-declareWinner();
-
-const btn = document.querySelector("button");
-btn.addEventListener("click", () => {
-  humanScore = 0; // Reset scores for a new game
-  computerScore = 0;
-  console.clear(); // Clear the console for a fresh start
-  // You can optionally add a message indicating a new game has begun
-  for (let i = 0; i < 5; i++) {
-    let computerChoice = getComputerChoice();
-    let humanChoice = getHumanChoice();
-    playRound(computerChoice, humanChoice);
+const btnContainer = document.querySelector(".btn-container");
+btnContainer.addEventListener("click", (e) => {
+  let playerChoice;
+  const computerChoice = getComputerChoice();
+  if (e.target.id == "rock") {
+    playerChoice = "rock";
+  } else if (e.target.id == "paper") {
+    playerChoice = "paper";
+  } else {
+    playerChoice = "scissors";
   }
-  declareWinner();
+  const roundResult = playRound(computerChoice, playerChoice);
+
+  declareWinner(roundResult);
 });
+
+function declareWinner(roundResult) {
+  const results = document.querySelector(".results");
+
+  results.childNodes[0].textContent = roundResult;
+  results.childNodes[3].textContent = `Your Score: ${humanScore}`;
+  results.childNodes[5].textContent = `Computer Score: ${computerScore}`;
+  if (humanScore == 5) {
+    results.childNodes[5].textContent = "You WIN the Game!";
+  } else if (computerScore == 5) {
+    results.childNodes[5].textContent = "Computer WINS the Game!";
+  }
+}
+
+const playAgainBtn = document.querySelector("#playAgain");
+playAgainBtn.addEventListener("click", () => {});

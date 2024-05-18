@@ -16,23 +16,20 @@
         height="auto"
         width="300px"
       />
-      <p>
-        <strong>Rock Paper Scissors</strong> is a two player game. Each player
-        chooses one of rock, paper or scissors, without knowing the other
-        player's choice. The winner is decided by a set of rules:
-      </p>
-      <ul>
-        <li>Rock beats scissors</li>
-        <li>Scissors beat paper</li>
-        <li>Paper beats rock</li>
-      </ul>
-      <p>
-        If both players choose the same, there is no winner for that round. For
-        this game, the computer will be one of the players.You get 5 trials to
-        finish the game. To play again, click the play again button.
-      </p>
+      <h3>Can you beat the Computer?</h3>
+      <div class="btn-container">
+        <button id="rock">Rock</button>
+        <button id="paper">Paper</button>
+        <button id="scissors">Scissors</button>
+      </div>
+      <div class="results">
+        <p class="roundResult"></p>
+        <p class="human">Your Score:</p>
+        <p class="computer">Computer Score:</p>
+        <p class="winner"></p>
+      </div>
     </section>
-    <button>Play again</button>
+    <button id="playAgain">Play again</button>
 
     <script src="./main.js"></script>
   </body>
