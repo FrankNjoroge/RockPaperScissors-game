@@ -3,8 +3,10 @@ body {
   margin: 0 auto;
   text-align: center;
   color: #0b405a;
-  background-color: #e1bebe;
+  background-color: #cfe5fd;
 }
+/* d4e6fb */
+/* dceafa */
 ul {
   list-style-type: none;
 }
@@ -19,11 +21,15 @@ button {
 }
 
 .btn-container {
-  margin: 3rem;
+  margin: 2rem;
+}
+.results {
+  font-weight: bold;
+  font-size: 17px;
 }
 
 button:hover {
-  background-color: #eba708;
+  background-color: #fab005;
 }
 @media (min-width: 768px) {
   body {

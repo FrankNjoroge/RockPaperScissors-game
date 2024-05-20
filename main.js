@@ -25,7 +25,7 @@ function playRound(computerChoice, humanChoice) {
     (computerChoice === "scissors" && humanChoice === "paper")
   ) {
     computerScore++;
-    return "Comp wins this round!";
+    return `Comp wins this round! It chose ${computerChoice}`;
   } else if (
     (computerChoice === "rock" && humanChoice === "rock") ||
     (computerChoice === "paper" && humanChoice === "paper") ||
@@ -53,16 +53,28 @@ btnContainer.addEventListener("click", (e) => {
 
 function declareWinner(roundResult) {
   const results = document.querySelector(".results");
-
   results.childNodes[0].textContent = roundResult;
   results.childNodes[3].textContent = `Your Score: ${humanScore}`;
   results.childNodes[5].textContent = `Computer Score: ${computerScore}`;
   if (humanScore == 5) {
     results.childNodes[5].textContent = "You WIN the Game!";
+    resetScoresAndDisableBtns();
   } else if (computerScore == 5) {
     results.childNodes[5].textContent = "Computer WINS the Game!";
+    resetScoresAndDisableBtns();
+  } else {
+    document
+      .querySelectorAll(".btn-container button")
+      .forEach((btn) => btn.removeAttribute("disabled"));
   }
 }
 
+function resetScoresAndDisableBtns() {
+  humanScore = 0;
+  computerScore = 0;
+  const btns = document.querySelectorAll(".btn-container button");
+  btns.forEach((btn) => btn.setAttribute("disabled", ""));
+}
+
 const playAgainBtn = document.querySelector("#playAgain");
-playAgainBtn.addEventListener("click", () => {});
+playAgainBtn.addEventListener("click", () => declareWinner());
